@@ -3,12 +3,23 @@
 A small, tidy Playwright project that automates the end‑to‑end purchase flow on [saucedemo.com](https://www.saucedemo.com/).  
 The test logs in as a standard user, adds a product to the cart, checks out, and verifies the order completion screen.
 
+## Key Highlights
+- Scalable Playwright automation framework using Page Object Model (POM)
+- End-to-end test coverage for user purchase journey
+- Multi-browser testing support (Chromium, Firefox, WebKit)
+- Clean and maintainable test structure
+
 ## Why this structure?
 - **Page Object Model** keeps the test readable and easy to extend.
 - **Typed selectors** and **clear assertions** reduce flakiness.
 - **Configurable baseURL** + multi‑browser projects (Chromium/Firefox/WebKit) via `playwright.config.ts`.
 
----
+## Test Coverage
+- Login with valid credentials
+- Login with invalid credentials
+- Add product to cart
+- Checkout flow validation
+- Order confirmation verification
 
 ## Setup
 
@@ -107,3 +118,6 @@ jobs:
 1. Create a new public repo on GitHub.
 2. Push this folder.
 3. Paste the repo link in your submission.
+
+## Note
+This project is a simplified and publicly shareable version of automation frameworks I have worked on in production environments.
