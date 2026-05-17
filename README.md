@@ -1,123 +1,172 @@
-# Sauce Demo – Playwright E2E (TypeScript)
+# Sauce Demo – Playwright Automation Framework
 
-A small, tidy Playwright project that automates the end‑to‑end purchase flow on [saucedemo.com](https://www.saucedemo.com/).  
-The test logs in as a standard user, adds a product to the cart, checks out, and verifies the order completion screen.
+End-to-end UI automation framework built using Playwright and TypeScript for validating critical e-commerce user journeys on SauceDemo.
 
-## Key Highlights
-- Scalable Playwright automation framework using Page Object Model (POM)
-- End-to-end test coverage for user purchase journey
-- Multi-browser testing support (Chromium, Firefox, WebKit)
-- Clean and maintainable test structure
+---
 
-## Why this structure?
-- **Page Object Model** keeps the test readable and easy to extend.
-- **Typed selectors** and **clear assertions** reduce flakiness.
-- **Configurable baseURL** + multi‑browser projects (Chromium/Firefox/WebKit) via `playwright.config.ts`.
+## Overview
+
+This project demonstrates a scalable Playwright automation framework following modern QA engineering practices including:
+
+* Page Object Model (POM)
+* Cross-browser execution
+* CI/CD integration with GitHub Actions
+* Reusable utilities and test data management
+* HTML reporting and failure diagnostics
+
+The framework automates the complete purchase workflow from login to order confirmation.
+
+---
+
+## Tech Stack
+
+* Playwright
+* TypeScript
+* Node.js
+* GitHub Actions
+* HTML Reports
+
+---
+
+## Framework Features
+
+* Cross-browser testing (Chromium, Firefox, WebKit)
+* Page Object Model architecture
+* Data-driven test support
+* Reusable page components
+* Parallel execution support
+* Failure screenshots and traces
+* CI/CD pipeline integration
+* HTML execution reports
+
+---
 
 ## Test Coverage
-- Login with valid credentials
-- Login with invalid credentials
-- Add product to cart
-- Checkout flow validation
-- Order confirmation verification
 
-## Setup
+### Authentication
 
-**Prereqs**: Node.js 18+
+* Valid login
+* Invalid login validation
 
-```bash
-npm ci || npm install
-npm run install:pw
+### Cart & Checkout
+
+* Add product to cart
+* Cart validation
+* Checkout process
+* Order completion verification
+
+### End-to-End Flow
+
+* Complete purchase journey automation
+* UI validations and URL assertions
+* Cart badge validation
+* Order success confirmation
+
+---
+
+## Project Structure
+
+```plaintext id="qwbw6i"
+pages/
+  LoginPage.ts
+  InventoryPage.ts
+  CartPage.ts
+  CheckoutPages.ts
+
+tests/
+  e2e.purchase.spec.ts
+
+fixtures/
+  test-data.ts
+
+.github/workflows/
+  playwright.yml
+
+playwright.config.ts
+package.json
+README.md
 ```
 
-## Run tests
+---
 
-Headless (default):
-```bash
+## Running Tests
+
+Install dependencies:
+
+```bash id="kvp2o8"
+npm install
+```
+
+Install Playwright browsers:
+
+```bash id="n8rb2m"
+npx playwright install
+```
+
+Run tests:
+
+```bash id="kz1q5p"
 npm test
 ```
 
-Headed (useful for demoing):
-```bash
+Run tests in headed mode:
+
+```bash id="sjm5ra"
 npm run test:headed
 ```
 
-View HTML report:
-```bash
+Open HTML report:
+
+```bash id="6s5yq5"
 npm run report
 ```
 
-## Project layout
+---
 
-```text
-pages/
-  LoginPage.ts            # login helpers + expectations
-  InventoryPage.ts        # add to cart + inventory assertions
-  CartPage.ts             # cart checks + go to checkout
-  CheckoutPages.ts        # step one, overview, and complete page objects
-tests/
-  e2e.purchase.spec.ts    # one clean end‑to‑end happy path
-fixtures/
-  test-data.ts            # small sample data
-playwright.config.ts      # baseURL, timeouts, browser projects, trace/screenshot
-```
+## GitHub Actions CI/CD
 
-## What the test asserts
+This framework integrates with GitHub Actions for automated test execution on every push and pull request.
 
-- Landing on **Products** after login, with URL check (`/inventory.html`).
-- Adding the chosen item increases the cart badge.
-- The cart contains the expected product name.
-- Checkout step‑one fields accept input and navigate forward.
-- Overview shows **item total**, **tax**, and **total** labels with currency.
-- Completion page URL (`/checkout-complete.html`) and **Thank you for your order!** header are visible.
-- Cart badge is cleared at the end (sanity that the session reflects an empty cart).
+Pipeline includes:
 
-## Notes
-
-- Selectors use `data-test` where available and semantic fallbacks where they aren't.
-- Trace is collected **on first retry**; screenshots/videos are kept for failures.
-
-## To Do (if I had more time)
-
-- **Negative paths**: locked_out_user, wrong password, and inventory access without login.
-- **Visual checks**: lightweight snapshot tests for critical screens.
-- **Data‑driven cases**: run the same flow against multiple SKUs and user profiles.
-- **Cross‑device**: add mobile viewport projects; validate responsive layout.
-- **Parallel smoke vs. regression**: tag tests (e.g., `@smoke`, `@regression`) and wire GitHub Actions matrix.
-- **Accessibility**: basic axe scans for important screens.
-- **Reporting**: Allure integration and CI artifacts upload.
-- **Env handling**: dotenv for creds/URLs; support staging/prod profiles.
-- **Flake defense**: add network‑idle waits on critical transitions if the AUT changes its timing.
+* Dependency installation
+* Browser setup
+* Automated Playwright execution
+* HTML report generation
 
 ---
 
-## CI (optional)
+## Reporting & Debugging
 
-A minimal GitHub Actions workflow can run tests on pull requests. Enable if desired by committing `.github/workflows/ci.yml`:
-
-```yaml
-name: e2e
-on: [push, pull_request]
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 20 }
-      - run: npm ci || npm install
-      - run: npx playwright install --with-deps
-      - run: npm test
-      - run: npm run report
-```
+* HTML Reports
+* Failure Screenshots
+* Playwright Trace Viewer
+* Video Recording on Failure
 
 ---
 
-## How to share
+## Future Enhancements
 
-1. Create a new public repo on GitHub.
-2. Push this folder.
-3. Paste the repo link in your submission.
+* API + UI hybrid framework integration
+* Accessibility testing
+* Visual regression testing
+* Data-driven parallel suites
+* Environment-based execution
+* Allure reporting integration
 
-## Note
-This project is a simplified and publicly shareable version of automation frameworks I have worked on in production environments.
+---
+
+## Author
+
+Neha Chawla
+Senior QA Automation Engineer
+
+Skills:
+
+* Playwright
+* Selenium
+* API Testing
+* Performance Testing
+* CI/CD Automation
+* Agile QA
+* GitHub Actions
